@@ -9,12 +9,13 @@ import secret_token
 def get_followers(Github_id, max=5):
     """returns a list of followers from an id, max is max number returned"""
     # TODO: test after Auth, check dictionary names and flow
-    url = "https://api.github.com/{0}/followers?client_id={1}&client_secret={2}".format(Github_id, secret_token.Client_ID, secret_token.Client_Secret)
-    page = requests.get(url)
-    page_content = page.text
-    followers_json = json.loads(page_content)
-    # assumes json from git is a dictionary type format on surface
-    followers = followers_json["followers"]
+    url = "https://api.github.com/users/{0}/followers".format(Github_id)
+    page = requests.get(url, auth=(secret_token.TOKEN, "x-oauth-basic"))
+    page_content = page.text # returns an array of dictionary type objects
+    followers_array = json.loads(page_content)
+    followers = []
+    for follower_dict in followers_array:
+        followers.append(follower_dict["login"])
     if len(followers) > max:
         followers = followers[0:max]
     return followers
