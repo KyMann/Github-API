@@ -17,6 +17,7 @@ These recursive functions in turn use the api wrappers, such as get_followers, t
 The get functions are all 
 
 TODOs:
+- Rebuild make_json function of GitProfile Class
 - Test flow through of followers retrieval
 - Write repos and stargazers recursive functions
 - Package for Pip

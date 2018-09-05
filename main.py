@@ -55,6 +55,7 @@ class GitProfile():
 
     def make_json(self):
         """makes the object, and it's follwer objects into dictionaries, then json.dumps them"""
+        # TODO: make_json is insufficient or broken, needs thorough testing
         json_dict = {"Github_id":self.Github_id}
         follower_list = []
         for follower in self.followers:
