@@ -50,6 +50,9 @@ class GitProfile():
         self.Github_id = Github_id
         self.followers = return_followers(Github_id, depth)
 
+    def __repr__(self):
+        return self.Github_id + " followed by:" + ", ".join(self.followers)
+
     def make_json(self):
         """makes the object, and it's follwer objects into dictionaries, then json.dumps them"""
         json_dict = {"Github_id":self.Github_id}
@@ -76,19 +79,21 @@ class GitStargazers():
 
 
 def return_followers(Github_id, depth):
-    """recursive function stacks git profile objects on followers"""
+    """helper function for GitProfile init, recursive function stacks git profile objects on followers"""
     if depth == 0:  # escape case
-        followers = GitProfile(Github_id, get_followers(Github_id))
+        followers = get_followers(Github_id)
         return followers
     else:
+        # TODO: this could be sped up by saving searches and reusing them, but that's a lot of work
         this_followers_followers = get_followers(Github_id)  # this namespace is confusing
-        for index, follower_id in this_followers_followers:  # for each follower
-            this_followers_followers[index] = return_followers(follower_id, depth-1)  # we run the function again, but not as deep
-        followers = GitProfile(Github_id, this_followers_followers)  # that way we create the pyramid of followers from the bottom up
+        followers = []
+        for follower_id in this_followers_followers:  # for each follower
+            followers.append(GitProfile(follower_id, depth-1))  # we repeat the profile creation (and implicitly repeat the return followers with one less depth)
         return followers
 
 
 def make_followers_json(Github_id):
+    """wraps all the logic and classes, takes id and returns specific json"""
     profile = GitProfile(Github_id, 3)
     return profile.make_json()
 
