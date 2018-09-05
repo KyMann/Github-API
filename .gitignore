@@ -103,4 +103,8 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# .idea framework
+.idea/
 
+# secret keys
+secret_token.py
