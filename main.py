@@ -64,7 +64,10 @@ class GitProfile():
             except AttributeError:
                 follower_list.append(follower)
         json_dict["followers"] = follower_list
-        return json.dumps(json_dict)
+        output_json = json.dumps(json_dict)
+        output_json = output_json.replace('\\', '')
+        return output_json
+    
 
 class GitRepo():
     def __init__(self, Github_id, repo, stargazers):
