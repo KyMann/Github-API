@@ -1,9 +1,21 @@
-from distutils.core import setup
+import setuptools
 
-setup(
-    name='Github-API',
+with open("README.md", 'r') as fh:
+    long_description = fh.read()
+
+setuptools.setup(
+    name='Github-API-Example',
     version='0.1',
+    author='Kyle Mann',
+    author_email='KyleThMann@gmail.com',
+    description = 'a coding challenge api wrapping Github',
+    long_description= long_description,
+    long_description_content_type = "text/markdown",
     packages=['Tests', 'src',],
-    license='MIT Liscence 2018',
-    long_description=open('README.md').read(),
+    url='https://github.com/KyMann/Github-API',
+    classifiers=["Programming Language :: Python :: 3",
+                 "License :: OSI Approved :: MIT License",
+                 "Operating System :: OS Independent",
+                 ],
+
 )
