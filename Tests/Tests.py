@@ -1,4 +1,4 @@
-from main import get_followers, return_followers, GitProfile, make_followers_json
+from src.main import get_followers, return_followers, GitProfile, make_followers_json
 
 
 def test_get_followers():

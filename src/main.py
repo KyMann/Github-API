@@ -3,6 +3,7 @@ import requests
 
 import secret_token
 
+
 # TODO: setup API?
 
 
@@ -65,6 +66,7 @@ class GitProfile():
                 follower_list.append(follower)
         json_dict["followers"] = follower_list
         output_json = json.dumps(json_dict)
+        # TODO: replace ugly replace functions with a make jsonable instead of nesting make json
         output_json = output_json.replace('\\', '')
         output_json = output_json.replace('"{', '{')
         output_json = output_json.replace('}"', '}')
