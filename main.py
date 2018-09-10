@@ -66,6 +66,8 @@ class GitProfile():
         json_dict["followers"] = follower_list
         output_json = json.dumps(json_dict)
         output_json = output_json.replace('\\', '')
+        output_json = output_json.replace('"{', '{')
+        output_json = output_json.replace('}"', '}')
         return output_json
     
 
@@ -92,7 +94,8 @@ def return_followers(Github_id, depth):
         this_followers_followers = get_followers(Github_id)  # this namespace is confusing
         followers = []
         for follower_id in this_followers_followers:  # for each follower
-            followers.append(GitProfile(follower_id, depth-1))  # we repeat the profile creation (and implicitly repeat the return followers with one less depth)
+            followers.append(GitProfile(follower_id, depth-1))
+            # we repeat the profile creation (and implicitly repeat the return followers with one less depth)
         return followers
 
 
